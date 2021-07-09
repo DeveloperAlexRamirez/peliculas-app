@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import movieDB from '../api/movieDB';
 import {Movie, MovieDBNowPlaying} from '../interfaces/movieInterface';
 
-const useMovies = () => {
+export const useMovies = () => {
   const [loading, setLoadgin] = useState(true);
 
   // TODO: Es de tipo Movie (archivo: movieInterface)
@@ -25,5 +25,3 @@ const useMovies = () => {
     loading,
   };
 };
-
-export default useMovies;

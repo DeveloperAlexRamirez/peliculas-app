@@ -1,8 +1,13 @@
 import React from 'react';
-import {View, Text, ActivityIndicator, TouchableOpacity} from 'react-native';
-import useMovies from '../hooks/useMovies';
-import MovieCard from '../components/MovieCard';
+import {View, ActivityIndicator, Dimensions} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+import Carousel from 'react-native-snap-carousel';
+
+import {useMovies} from '../hooks/useMovies';
+import MovieCard from '../components/MovieCard';
+
+const {width: windowWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -19,7 +24,19 @@ const HomeScreen = () => {
 
   return (
     <View style={{marginTop: top + 20}}>
-      <MovieCard movie={peliculasEnCine[0]} />
+      <View
+        style={{
+          height: 440,
+          // backgroundColor: 'red',
+        }}>
+        <Carousel
+          // TODO: Propiedades necesarias para el Carousel
+          data={peliculasEnCine}
+          renderItem={({item}: any) => <MovieCard movie={item} />}
+          sliderWidth={windowWidth}
+          itemWidth={300}
+        />
+      </View>
     </View>
   );
 };

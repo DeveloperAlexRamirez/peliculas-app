@@ -10,28 +10,40 @@ const MovieCard = ({movie}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
   return (
-    <View>
+    <View style={styles.sombra}>
       <Image
         source={{
           uri,
         }}
         style={styles.image}
       />
-      <Text
-        style={{
-          marginTop: 20,
-          fontSize: 34,
-        }}>
-        {movie.title}
-      </Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   image: {
-    width: '100%',
-    height: '90%',
+    // Para que se expanda en el view
+    flex: 1,
+    borderRadius: 20,
+  },
+
+  sombra: {
+    // Para que se expanda en el view
+    width: 300,
+    height: 420,
+
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 20,
+
+    elevation: 7,
+
+    borderRadius: 20,
   },
 });
 
