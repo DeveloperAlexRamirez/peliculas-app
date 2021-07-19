@@ -12,10 +12,11 @@ const ActorItem = ({cast}: Props) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.card}>
-        <Image source={{uri}} style={styles.image} />
+        {cast.profile_path && <Image source={{uri}} style={styles.image} />}
+
         <View style={styles.textContainer}>
+          <Text style={styles.textBlack}>{cast.name}</Text>
           <Text>{cast.character}</Text>
-          <Text>{cast.name}</Text>
         </View>
       </View>
     </View>
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
   },
 
   card: {
+    height: 70,
     backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
@@ -54,6 +56,11 @@ const styles = StyleSheet.create({
 
   textContainer: {
     padding: 15,
+  },
+
+  textBlack: {
+    fontWeight: 'bold',
+    fontSize: 19,
   },
 });
 

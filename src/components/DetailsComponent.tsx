@@ -30,3 +30,5 @@ const DetailsComponent = ({movieFull, cast}: Props) => {
 };
 
 export default DetailsComponent;
+
+// TODO: Queda pendiente lo de la categoria de peliculas

@@ -10,17 +10,17 @@ import {
 } from 'react-native';
 import {RootStackParams} from '../stack/Navigation';
 
-import Icon from 'react-native-vector-icons/Ionicons';
 import DetailsComponent from '../components/DetailsComponent';
-import SliderCasting from '../components/SliderCasting';
 import {movieCredits} from '../hooks/useMovieCredits';
-import {ActivityIndicator} from 'react-native';
+import Loading from '../components/Loading';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+import {TouchableOpacity} from 'react-native';
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {}
 
 const screenHeight = Dimensions.get('screen').height;
 
-const DetailScreen = ({route}: Props) => {
+const DetailScreen = ({route, navigation}: Props) => {
   const movie = route.params;
 
   const {loading, cast, movieFull} = movieCredits(movie.id);
@@ -30,7 +30,9 @@ const DetailScreen = ({route}: Props) => {
   return (
     <ScrollView>
       <View style={styles.containerCard}>
-        <Image style={styles.image} source={{uri}} />
+        <View style={styles.imageBorder}>
+          <Image style={styles.image} source={{uri}} />
+        </View>
       </View>
 
       <View style={{paddingHorizontal: 25}}>
@@ -50,16 +52,22 @@ const DetailScreen = ({route}: Props) => {
             style={{marginRight: 5}}
           />
           <Text style={styles.textGray}>{movie.vote_average}.-</Text>
-          {/* <Text>{movie.}</Text> */}
+          <Text style={styles.textGray}>
+            {movieFull?.genres.map(g => g.name).join(', ')}
+          </Text>
         </View>
 
         {loading ? (
-          <View style={{flex: 1, justifyContent: 'center'}}>
-            <ActivityIndicator color="red" size={80} />
-          </View>
+          <Loading />
         ) : (
           <DetailsComponent movieFull={movieFull!} cast={cast} />
         )}
+      </View>
+
+      <View style={styles.backBtn}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="arrow-back-circle-outline" size={70} color="white" />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -74,19 +82,28 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 25,
   },
 
+  imageBorder: {
+    flex: 1,
+    overflow: 'hidden',
+    borderBottomEndRadius: 25,
+    borderBottomStartRadius: 25,
+  },
+
   containerCard: {
+    width: '100%',
+    height: screenHeight * 0.7,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 10,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.24,
     shadowRadius: 7,
 
-    elevation: 16,
-
-    borderRadius: 25,
-    marginBottom: 25,
+    elevation: 9,
+    borderBottomEndRadius: 25,
+    borderBottomStartRadius: 25,
+    marginBottom: 20,
   },
 
   textGray: {
@@ -104,6 +121,14 @@ export const styles = StyleSheet.create({
   overview: {
     color: '#000000',
     fontSize: 17,
+  },
+
+  backBtn: {
+    position: 'absolute',
+    zIndex: 999,
+    elevation: 9,
+    top: 10,
+    left: 5,
   },
 });
 

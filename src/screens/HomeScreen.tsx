@@ -7,6 +7,8 @@ import Carousel from 'react-native-snap-carousel';
 import {useMovies} from '../hooks/useMovies';
 import MovieCard from '../components/MovieCard';
 import HorizontalSlider from '../components/HorizontalSlider';
+import Loading from '../components/Loading';
+import GrandienteBackground from '../components/GrandienteBackground';
 
 const {width: windowWidth} = Dimensions.get('window');
 
@@ -16,38 +18,36 @@ const HomeScreen = () => {
   const {loading, nowPlaying, popular, topRated, upcoming} = useMovies();
 
   if (loading) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <ActivityIndicator color="red" size={80} />
-      </View>
-    );
+    return <Loading />;
   }
 
   return (
-    <ScrollView>
-      <View style={{marginTop: top + 20}}>
-        {/* Carousel principal */}
-        <View
-          style={{
-            height: 440,
-            // backgroundColor: 'red',
-          }}>
-          <Carousel
-            // TODO: Propiedades necesarias para el Carousel
-            data={nowPlaying}
-            renderItem={({item}: any) => <MovieCard movie={item} />}
-            sliderWidth={windowWidth}
-            itemWidth={300}
-            inactiveSlideOpacity={0.9}
-          />
-        </View>
+    <GrandienteBackground>
+      <ScrollView>
+        <View style={{marginTop: top + 20}}>
+          {/* Carousel principal */}
+          <View
+            style={{
+              height: 440,
+              // backgroundColor: 'red',
+            }}>
+            <Carousel
+              // TODO: Propiedades necesarias para el Carousel
+              data={nowPlaying}
+              renderItem={({item}: any) => <MovieCard movie={item} />}
+              sliderWidth={windowWidth}
+              itemWidth={300}
+              inactiveSlideOpacity={0.9}
+            />
+          </View>
 
-        {/* Peliculas populares */}
-        <HorizontalSlider title="Popular movies" movies={popular} />
-        <HorizontalSlider title="Top rated" movies={topRated} />
-        <HorizontalSlider title="Upcoming" movies={upcoming} />
-      </View>
-    </ScrollView>
+          {/* Peliculas populares */}
+          <HorizontalSlider title="Popular movies" movies={popular} />
+          <HorizontalSlider title="Top rated" movies={topRated} />
+          <HorizontalSlider title="Upcoming" movies={upcoming} />
+        </View>
+      </ScrollView>
+    </GrandienteBackground>
   );
 };
 

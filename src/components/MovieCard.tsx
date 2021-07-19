@@ -34,7 +34,6 @@ const MovieCard = ({movie, width = 300, height = 420, margin = 0}: Props) => {
   );
 };
 
-// TODO: CORREGIR LO DE LOS SHADOWS
 export const styles = StyleSheet.create({
   sombra: {
     // Para que se expanda en el view
@@ -51,7 +50,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 18,
 
-    elevation: 13,
+    elevation: 7,
   },
 
   image: {

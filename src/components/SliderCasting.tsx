@@ -12,6 +12,7 @@ const SliderCasting = ({cast}: Props) => {
     <FlatList
       data={cast}
       renderItem={({item}) => <ActorItem cast={item} />}
+      keyExtractor={item => item.id.toString()}
       horizontal={true}
       showsHorizontalScrollIndicator={false}
     />
