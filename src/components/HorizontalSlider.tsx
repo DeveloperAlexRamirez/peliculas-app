@@ -12,7 +12,7 @@ const HorizontalSlider = ({movies, title}: Props) => {
   return (
     <View
       style={{
-        height: title ? 270 : 240,
+        height: title ? 280 : 260,
       }}>
       {title && <Text style={{fontSize: 30, fontWeight: 'bold'}}>{title}</Text>}
       <FlatList

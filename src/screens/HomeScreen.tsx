@@ -44,7 +44,6 @@ const HomeScreen = () => {
 
         {/* Peliculas populares */}
         <HorizontalSlider title="Popular movies" movies={popular} />
-
         <HorizontalSlider title="Top rated" movies={topRated} />
         <HorizontalSlider title="Upcoming" movies={upcoming} />
       </View>
